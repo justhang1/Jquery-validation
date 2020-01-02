@@ -1,0 +1,117 @@
+<html>
+<head>
+<title>JQuery Form Validation Examples</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class ="container">
+<h3 class = "text-center">Sample Form to be validate</h3>
+<div class = "col-lg-8 m-auto d-block">
+<form>
+<div class = "form-group">
+<label for = "user">UserName</label>
+<input type = "text" id = "username" name = "username" class = "form-control" autocomplete = "off">
+<h5 id = "usermessage"></h5>
+</div>
+<div class = "form-group">
+<label for = "password">Password</label>
+<input type = "text" id = "password" name = "password" class = "form-control">
+<h5 id = "passwordmessage"></h5>
+</div>
+<div class = "form-group">
+<label for = "conpassword">Confirm Password</label>
+<input type = "text" id = "conpassword" name = "conpassword" class = "form-control">
+<h5 id = "conpasswordmessage"></h5>
+</div>
+<div class = "form-group">
+<input type = "submit" id = "btnsubmit" value = "Submit" name = "btnsubmit" class = "btn btn-primary">
+</div>
+</form>
+
+</div>
+
+</div>
+</body>
+<script type = "text/javascript">
+$(document).ready(function(){
+debugger
+	$('#usermessage').hide();
+	$('#passwordmessage').hide();
+	$('#conpasswordmessage').hide();
+	
+	var user_err = true;
+	var pass_err = true;
+	var conpass_err = true;
+	
+	$('#username').keyup(function(){
+		user_check();
+	});
+	$('#password').keyup(function(){
+		pass_check();
+	});
+	$('#conpassword').keyup(function(){
+		pass_compair();
+	});
+	
+	$('#btnsubmit').click(function(){
+	user_check();
+	pass_check();
+	pass_compair();
+	return false;
+	});
+	
+	function pass_check()
+		{
+		var pass_value = $('#password').val();
+		if(pass_value.length == '' || pass_value.length <= 6){
+		$('#passwordmessage').show();
+		$('#passwordmessage').html("**please fill out password having length > 6");
+		$('#passwordmessage').focus();
+		$('#passwordmessage').css ("color","red");
+			pass_err = false;
+			}else{
+			$('#passwordmessage').hide();
+			}
+		}
+	function pass_compair()
+		{
+			var pass_value = $('#password').val();
+			var passcompair_value = $('#conpassword').val();
+			if(pass_value != passcompair_value){
+				$('#conpasswordmessage').show();
+				$('#conpasswordmessage').html("** Repeat password not matched");
+				$('#conpasswordmessage').focus();
+				$('#conpasswordmessage').css ("color","red");
+				con_pass = false;
+				
+				}else{
+					$('#conpasswordmessage').hide();
+					}
+		}
+	function user_check()
+		{
+		var user_val = $('#username').val();
+		if( user_val.length == ''){
+			$('#usermessage').show();
+			$('#usermessage').html("** Please fill out the UserName");
+			$('#usermessage').focus();
+			$('#usermessage').css ("color","red");
+			//user_err = false;
+				//return false;
+				}else{
+				$('#usermessage').hide();
+				}
+		}
+});
+</script>
+</html>
